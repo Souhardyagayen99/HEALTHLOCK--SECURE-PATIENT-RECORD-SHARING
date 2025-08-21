@@ -2,7 +2,30 @@
 {% block content %}
 <h2>Share Link</h2>
 <p>Share this URL securely. It expires in <strong>{{ max_age }}</strong> seconds.</p>
-<input type="text" readonly value="{{ share_url }}" onclick="this.select();">
+<div style="display:flex; gap:8px; align-items:center;">
+<input id="share-url" type="text" readonly value="{{ share_url }}" onclick="this.select();">
+<button id="copy-btn" class="btn" type="button">Copy</button>
+<span id="copy-status" class="muted"></span>
+</div>
 <p class="muted">Anyone with the link can view the record until it expires.</p>
 <a class="btn secondary" href="{{ url_for('list_records') }}">Back</a>
+<script>
+(function(){
+  var btn = document.getElementById('copy-btn');
+  var input = document.getElementById('share-url');
+  var status = document.getElementById('copy-status');
+  function showCopied(){ if(status){ status.textContent = 'Copied!'; setTimeout(function(){ status.textContent=''; }, 1500); } }
+  function fallbackCopy(){ input.select(); document.execCommand('copy'); showCopied(); }
+  if(btn && input){
+    btn.addEventListener('click', function(){
+      var value = input.value;
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(value).then(showCopied).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    });
+  }
+})();
+</script>
 {% endblock %}
