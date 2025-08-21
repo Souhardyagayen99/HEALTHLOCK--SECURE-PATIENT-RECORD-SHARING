@@ -23,7 +23,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Fernet
-fernet = load_or_create_fernet()
+fernet = load_or_create_fernet(os.getenv('FERNET_KEY_PATH', 'fernet.key'))
 
 
 # Models
@@ -199,4 +199,5 @@ def robots_txt():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.getenv('PORT', '5000'))
+    app.run(debug=True, host='0.0.0.0', port=port)
