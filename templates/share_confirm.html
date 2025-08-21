@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Share Record</h2>
+<p>Generate a read-only link to share this record. The link will expire in <strong>{{ max_age }}</strong> seconds.</p>
+<form method="post">
+  <button class="btn" type="submit">Generate link</button>
+  <a class="btn secondary" href="{{ url_for('list_records') }}">Cancel</a>
+</form>
+{% endblock %}

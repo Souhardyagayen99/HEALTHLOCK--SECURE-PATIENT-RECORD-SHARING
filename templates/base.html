@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HEALTHLOCK</title>
+    <style>
+      body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #f6f7fb; }
+      header { background: #1f2937; color: #fff; padding: 12px 16px; }
+      header a { color: #fff; text-decoration: none; margin-right: 12px; }
+      .container { max-width: 900px; margin: 24px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+      .btn { display: inline-block; padding: 8px 12px; background: #2563eb; color: #fff; border-radius: 6px; text-decoration: none; border: none; cursor: pointer; }
+      .btn.secondary { background: #6b7280; }
+      .btn.warning { background: #d97706; }
+      .btn.danger { background: #dc2626; }
+      input, textarea { width: 100%; padding: 8px; margin: 6px 0 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { text-align: left; padding: 8px; border-bottom: 1px solid #e5e7eb; }
+      .flash { padding: 10px 12px; background: #ecfeff; border: 1px solid #bae6fd; border-radius: 6px; margin-bottom: 12px; }
+      .muted { color: #6b7280; font-size: 12px; }
+      code { background: #f3f4f6; padding: 2px 4px; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">HEALTHLOCK</a>
+        <span style="float:right;">
+          {% if session.get('user_id') %}
+            <a href="/records">Records</a>
+            <a href="/logout">Logout</a>
+          {% else %}
+            <a href="/login">Login</a>
+          {% endif %}
+        </span>
+      </nav>
+    </header>
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

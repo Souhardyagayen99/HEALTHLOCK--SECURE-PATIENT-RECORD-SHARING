@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Share Link</h2>
+<p>Share this URL securely. It expires in <strong>{{ max_age }}</strong> seconds.</p>
+<input type="text" readonly value="{{ share_url }}" onclick="this.select();">
+<p class="muted">Anyone with the link can view the record until it expires.</p>
+<a class="btn secondary" href="{{ url_for('list_records') }}">Back</a>
+{% endblock %}

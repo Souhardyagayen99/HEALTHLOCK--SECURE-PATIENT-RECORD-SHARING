@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>New Patient Record</h2>
+<form method="post">
+  <label>Patient name</label>
+  <input type="text" name="patient_name" required>
+  <label>Record content</label>
+  <textarea name="content" rows="10" required placeholder="Enter clinical notes, allergies, medications..."></textarea>
+  <button class="btn" type="submit">Save</button>
+  <a class="btn secondary" href="{{ url_for('list_records') }}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Shared Record</h2>
+{% if error %}
+  <div class="flash">{{ error }}</div>
+  <a class="btn secondary" href="/">Home</a>
+{% else %}
+  <h3>#{{ record.id }} — {{ record.patient_name }}</h3>
+  <pre style="white-space:pre-wrap; background:#f9fafb; padding:12px; border-radius:6px; border:1px solid #e5e7eb;">{{ content }}</pre>
+  <p class="muted">This link may expire; request a new one if needed.</p>
+{% endif %}
+{% endblock %}
